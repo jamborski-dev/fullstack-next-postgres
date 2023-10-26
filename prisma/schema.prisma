@@ -1,105 +1,105 @@
-// TODO: see docs aobut generator, datasource and @@map directives
-// TODO: read on NextAuth + pg https://next-auth.js.org/getting-started/upgrade-v4#postgres
-//  https://authjs.dev/reference/adapters#models
-//  main doc: https://next-auth.js.org/getting-started/example
+// // TODO: see docs aobut generator, datasource and @@map directives
+// // TODO: read on NextAuth + pg https://next-auth.js.org/getting-started/upgrade-v4#postgres
+// //  https://authjs.dev/reference/adapters#models
+// //  main doc: https://next-auth.js.org/getting-started/example
 
-// Config
+// // Config
 
-generator client {
-  provider = "prisma-client-js"
-}
+// generator client {
+//   provider = "prisma-client-js"
+// }
 
-datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-}
+// datasource db {
+//   provider  = "postgresql"
+//   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+//   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+// }
 
-// Enum types
+// // Enum types
 
-enum Status {
-  pending
-  approved
-  rejected
-}
+// enum Status {
+//   pending
+//   approved
+//   rejected
+// }
 
-enum Role {
-  DEV
-  USER
-  ADMIN
-  COACH
-}
+// enum Role {
+//   DEV
+//   USER
+//   ADMIN
+//   COACH
+// }
 
-// Auth models
+// // Auth models
 
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-  oauth_token_secret String?
-  oauth_token        String?
+// model Account {
+//   id                 String  @id @default(cuid())
+//   userId             String  @map("user_id")
+//   type               String
+//   provider           String
+//   providerAccountId  String  @map("provider_account_id")
+//   refresh_token      String?
+//   access_token       String?
+//   expires_at         Int?
+//   token_type         String?
+//   scope              String?
+//   id_token           String?
+//   session_state      String?
+//   oauth_token_secret String?
+//   oauth_token        String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
-}
+//   @@unique([provider, providerAccountId])
+// }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+// model Session {
+//   id           String   @id @default(cuid())
+//   sessionToken String   @unique @map("session_token")
+//   userId       String   @map("user_id")
+//   expires      DateTime
+//   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
 
-model VerificationToken {
-  id         Int      @id @default(autoincrement())
-  identifier String
-  token      String   @unique
-  expires    DateTime
+// model VerificationToken {
+//   id         Int      @id @default(autoincrement())
+//   identifier String
+//   token      String   @unique
+//   expires    DateTime
 
-  @@unique([identifier, token])
-}
+//   @@unique([identifier, token])
+// }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  role          Role      @default(USER)
-  bookings      Booking[] // refers to bookings that this user has made
-  classes       Class[] // refers to classes that this user is coaching if role is COACH / shuold be empty if not
-  accounts      Account[] // this is array for the case where multiple providers are used (eg. Goolge, Facebook, etc.)
-  sessions      Session[]
-}
+// model User {
+//   id            String    @id @default(cuid())
+//   name          String?
+//   email         String?   @unique
+//   emailVerified DateTime?
+//   image         String?
+//   role          Role      @default(USER)
+//   bookings      Booking[] // refers to bookings that this user has made
+//   classes       Class[] // refers to classes that this user is coaching if role is COACH / shuold be empty if not
+//   accounts      Account[] // this is array for the case where multiple providers are used (eg. Goolge, Facebook, etc.)
+//   sessions      Session[]
+// }
 
-// Content models
+// // Content models
 
-model Booking {
-  id      String  @id @default(cuid())
-  title   String
-  content String?
-  status  Status  @default(pending)
-  user    User?   @relation(fields: [userId], references: [id])
-  userId  String?
-}
+// model Booking {
+//   id      String  @id @default(cuid())
+//   title   String
+//   content String?
+//   status  Status  @default(pending)
+//   user    User?   @relation(fields: [userId], references: [id])
+//   userId  String?
+// }
 
-model Class {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  tags        String[] // later on move on to its own model for the ease of search by tags
-  published   Boolean  @default(false)
-  coach       User?    @relation(fields: [coachId], references: [id])
-  coachId     String?
-}
+// model Class {
+//   id          String   @id @default(cuid())
+//   title       String
+//   description String?
+//   tags        String[] // later on move on to its own model for the ease of search by tags
+//   published   Boolean  @default(false)
+//   coach       User?    @relation(fields: [coachId], references: [id])
+//   coachId     String?
+// }
