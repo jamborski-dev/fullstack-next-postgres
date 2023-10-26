@@ -1,3 +1,18 @@
-# Fullstack Authentication Example with Next.js and NextAuth.js
+### Game stuff
 
-This is the starter project for the fullstack tutorial with Next.js and Prisma. You can find the final version of this project in the [`final`](https://github.com/prisma/blogr-nextjs-prisma/tree/final) branch of this repo.
+#### Some Google fonts to think
+
+    - Lobster (for headings)
+    - Carter One (for headings)
+    - Fugaz One (for headings)
+    - Oleo Script (for headings) - 2 styles
+    - Londrina Solid (for headings) - 4 styles
+    - Special Elite (looks like typewriter)
+    - Allura (for difficult to read mode)
+
+### TODO
+
+- [ ] Start timer on first keypress
+- [ ]Finished game popup with stats
+- [ ]Styling for mobile
+- [ ] Style error text

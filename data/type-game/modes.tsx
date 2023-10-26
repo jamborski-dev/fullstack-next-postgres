@@ -1,6 +1,6 @@
 import { GiStopwatch, GiShieldBash, GiEyeTarget } from "react-icons/gi"
 import { DiCode } from "react-icons/di"
-import { classicText } from "./text"
+import { classicText } from "./sourceTexts"
 
 export const modes = [
   {

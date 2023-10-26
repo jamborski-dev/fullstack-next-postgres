@@ -16,17 +16,18 @@ const TypeGamePage = () => {
   return (
     <Root>
       <Header>
-        <Title>Typing game (WIP)</Title>
+        <Title>
+          Type<span>Quest</span>
+        </Title>
+        <Info>
+          Browser-based typing game to challenge your typing speed and accuracy. There is variety of
+          modes to play including classic time attack, survival, blink, developer and more. You can
+          login with your Google account to save your score to the leader board. Happy typing!
+        </Info>
       </Header>
       <Body>
         {!isPlaying ? (
           <>
-            <Info>
-              Browser-based typing game to challenge your typing speed and accuracy. There is
-              variety of modes to play including classic time attack, survival, blink, developer and
-              more. You can login with your Google account to save your score to the leader board.
-              Happy typing!
-            </Info>
             <Modes>
               {modes.map(item => (
                 <ModeCard key={item.id} mode={item} setMode={setMode} selected={mode} />
@@ -37,7 +38,7 @@ const TypeGamePage = () => {
             </Button>
           </>
         ) : (
-          <GameUI mode={mode} />
+          <GameUI mode={mode} sourceText={modes.find(m => m.name === mode).text} />
         )}
       </Body>
     </Root>
@@ -57,17 +58,23 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 4rem;
 `
 
-const Title = styled.h1`
-  font-size: 40px;
-  margin-bottom: 10px;
+const Title = styled.div`
+  font-size: 4rem;
+  font-family: var(--font-special-elite);
+
+  span {
+    color: var(--color-primary-100);
+  }
 `
 
 const Info = styled.p`
-  font-size: 18px;
+  font-size: 1.3rem;
+  max-width: 65ch;
   text-align: center;
+  margin-top: 2rem;
 `
 
 const Body = styled.div`

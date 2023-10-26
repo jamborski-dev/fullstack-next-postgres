@@ -1,11 +1,11 @@
 :root {
   /** CSS DARK THEME PRIMARY COLORS */
-  --color-primary-100: #451075;
-  --color-primary-200: #5b2c84;
-  --color-primary-300: #6f4593;
-  --color-primary-400: #845ea2;
-  --color-primary-500: #9877b2;
-  --color-primary-600: #ad91c1;
+  --color-primary-100: #756610;
+  --color-primary-200: #85762e;
+  --color-primary-300: #958647;
+  --color-primary-400: #a49660;
+  --color-primary-500: #b4a779;
+  --color-primary-600: #c3b893;
   /** CSS DARK THEME SURFACE COLORS */
   --color-surface-100: #121212;
   --color-surface-200: #282828;
@@ -14,12 +14,12 @@
   --color-surface-500: #717171;
   --color-surface-600: #8b8b8b;
   /** CSS DARK THEME MIXED SURFACE COLORS */
-  --color-surface-mixed-100: #18131b;
-  --color-surface-mixed-200: #2d2830;
-  --color-surface-mixed-300: #433f46;
-  --color-surface-mixed-400: #5b585e;
-  --color-surface-mixed-500: #747177;
-  --color-surface-mixed-600: #8f8c90;
+  --color-surface-mixed-100: #1c1a14;
+  --color-surface-mixed-200: #312f29;
+  --color-surface-mixed-300: #474540;
+  --color-surface-mixed-400: #5f5d58;
+  --color-surface-mixed-500: #777672;
+  --color-surface-mixed-600: #91908c;
 }
 
 html {
@@ -64,7 +64,7 @@ a {
 }
 
 p {
-  font-size: 13px;
+  line-height: 1.8;
   margin: 0;
 }
 
