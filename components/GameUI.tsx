@@ -52,6 +52,7 @@ export const GameUI: FC<GameUIProps> = ({ mode, sourceText, seconds = 60 }) => {
   const [wpm, setWpm] = useState(0)
   const [keyPressed, setKeyPressed] = useState<CharKey>(null)
   const [hasStarted, setHasStarted] = useState(false)
+  const [suppressNextPoints, setSuppressNextPoints] = useState(false)
 
   const isComplete = textPos === sourceText.length - 1 || timer === 0
 
@@ -89,6 +90,7 @@ export const GameUI: FC<GameUIProps> = ({ mode, sourceText, seconds = 60 }) => {
       setTotalScore(prev => prev + streak)
       setStreak(0)
       setBackspaceCount(prev => prev + 1)
+      setSuppressNextPoints(true)
       return
     }
 
@@ -100,18 +102,20 @@ export const GameUI: FC<GameUIProps> = ({ mode, sourceText, seconds = 60 }) => {
       if (streak >= 10000) setMultiplier(5)
 
       // add 10 points for correct capitalization
-      const points = 10 * multiplier
+      const points = suppressNextPoints ? 0 : 10 * multiplier
       const currStreak = streak + points
       setCurrentPoints(points)
       setStreak(prev => prev + points)
       setCurrentScore(() => totalScore + currStreak)
+      if (suppressNextPoints) setSuppressNextPoints(false)
 
       return "correct"
     } else if (typedChar.toLocaleLowerCase() === currentChar.toLocaleLowerCase()) {
+      // above check should account for accents in other languages (e.g. é, à, etc.)
       // add 5 points for correct character only
       // this won't cancel streak, but will decrease multiplier by 1
       setMultiplier(prev => (prev > 1 ? prev - 1 : 1))
-      const points = 5 * multiplier
+      const points = suppressNextPoints ? 0 : 5 * multiplier
       const currStreak = streak + points
       setCurrentPoints(points)
       setCurrentScore(() => totalScore + currStreak)

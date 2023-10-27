@@ -12,7 +12,8 @@
 
 ### TODO
 
-- [ ] Start timer on first keypress
+- [x] Start timer on first keypress
 - [ ]Finished game popup with stats
-- [ ]Styling for mobile
+- [ ] Styling for mobile
 - [ ] Style error text
+- [ ] Supress next points when backspace was the last key
